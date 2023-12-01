@@ -1,0 +1,20 @@
+{{ define "_rowUser" }}
+{{ $inner := index . "inner" }}
+{{ $trans := index . "trans" }}
+{{ $isAdmin := index . "isAdmin" }}
+{{ $loggedIn := index . "loggedIn" }}
+<tr id="{{$inner.ID}}">
+    <td>{{$inner.ID}}</td>
+    <td><a href="/profile/{{$inner.Username}}">{{$inner.Username}}</a></td>
+    <td>
+        {{if $isAdmin}}
+        {{$inner.Email}}
+        {{else if eq $inner.Username $loggedIn.Username}}
+        {{$inner.Email}}
+        {{end}}
+    </td>
+    <td>{{FormatDate $inner.ActivatedAt}}</td>
+    <td>{{MemberSinceDays $inner}}</td>
+    <td>{{$inner.Role.RoleName}}</td>
+</tr>
+{{ end }}

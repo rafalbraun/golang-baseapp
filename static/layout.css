@@ -1,0 +1,37 @@
+/* basic layout */
+* {
+    box-sizing: border-box;
+    font-size: 16px;
+}
+html {
+    height:100%;
+}
+body {
+    height:100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+header,
+footer {
+    z-index: 3;
+}
+main {
+    position: relative;
+/*    width: 1400px;*/
+    margin: 0 auto;
+}
+
+/* styles */
+tr th a i {
+    color: black;
+}
+tr th a {
+    float:right;
+}
+.btn-group-xs > .btn, .btn-xs {
+    padding: .35em .65em;
+    font-size: .75em;
+    line-height: 1;
+    vertical-align: baseline;
+    border-radius: .25rem;
+}

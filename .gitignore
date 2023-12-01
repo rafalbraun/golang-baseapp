@@ -1,0 +1,9 @@
+.idea
+.env
+webserver.exe
+webserver
+logs.db
+storage.db
+pass_file
+certbot/conf/live
+vendor/

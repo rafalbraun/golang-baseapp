@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" >
+{{ template "_head" . }}
+<body>
+{{ template "_header" . }}
+<main class="col-xxl-10 col-xl-10 col-lg-10 col-md-12 col-sm-12">
+    <form action="/users">
+        <div class="pt-2">
+            <div class="d-flex input-group input-group-sm mb-2" style="gap: 6px">
+                <input class="form-control me-2" name="search" type="search" aria-label="Search" value="{{ $.Search }}">
+                <div class="d-flex" style="gap: 3px">
+                    <button class="btn btn-outline-primary btn-xs" style="font-size:1rem;" type="submit">{{ call .Trans "Search" }}</button>
+                    <button class="btn btn-outline-primary btn-xs" style="font-size:1rem;" type="button">Advanced</button>
+                </div>
+            </div>
+            <table class="table table-hover border-bottom">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">{{ call .Trans "Username" }}</th>
+                    <th scope="col">{{ call .Trans "Email" }}</th>
+                    <th scope="col">{{ call .Trans "Activated at" }}</th>
+                    <th scope="col">{{ call .Trans "Member since [days]" }}</th>
+                    <th scope="col">{{ call .Trans "Role" }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{range .Users}}
+                {{ template "_rowUser" (MapPageData $ .) }}
+                {{end}}
+                </tbody>
+            </table>
+            <nav>
+                <ul class="pagination justify-content-end">
+                    {{range $page := intRange 1 .Pagination.Page .Pagination.TotalPages}}
+                        {{if eq $page 0}}
+                        <li class="page-item disabled"><a class="page-link">...</a></li>
+                        {{else if eq $page $.Pagination.Page}}
+                        <li class="page-item active"><a class="page-link" href="/users?records={{$.Pagination.Limit}}&page={{$page}}">{{$page}}</a></li>
+                        {{else}}
+                        <li class="page-item"><a class="page-link" href="/users?records={{$.Pagination.Limit}}&page={{$page}}">{{$page}}</a></li>
+                        {{end}}
+                    {{end}}
+                </ul>
+            </nav>
+        </div>
+    </form>
+</main>
+{{ template "_footer" }}
+</body>
+</html>

@@ -1,0 +1,21 @@
+version: '3.8'
+networks:
+  backend:
+    name: backend
+services:
+  golang-baseapp:
+    container_name: webapp
+    ports:
+      - 80:8080
+      - 443:4040
+    build:
+      dockerfile: Dockerfile
+      context: .
+    tty: true
+    networks:
+      - backend
+    volumes:
+      - ./vendor:/src/vendor
+volumes:
+  db:
+    driver: local
